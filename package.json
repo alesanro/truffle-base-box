@@ -1,0 +1,41 @@
+{
+	"name": "truffle-base-project",
+	"version": "0.0.1",
+	"description": "Provides basic truffle structure for ethereum project",
+	"main": "truffle.js",
+	"scripts": {
+		"test": "npx truffle test",
+		"compile": "npx truffle compile",
+		"compile:all": "npx truffle compile --all",
+		"testrpc": "npx ganache-cli -g 1 --gasLimit 8000000 --trace_request true | grep -Ev \"FilterSubprovider|eth_getFilterChanges\"",
+		"lint:sol": "npx solium --dir contracts",
+		"lint:js": "npx eslint . --fix",
+		"lint": "npm run lint:sol && npm run lint:js",
+		"release": "standard-version",
+		"coverage": "./node_modules/.bin/solidity-coverage"
+	},
+	"devDependencies": {
+		"ganache-cli": "^6.1",
+		"truffle": "^4.1.13",
+		"abi-decoder": "^1",
+		"babel-polyfill": "^6.26",
+		"babel-preset-env": "^1.7",
+		"babel-register": "^6.26",
+		"eslint": "4",
+		"solium": "1",
+		"babel-eslint": "^8.2",
+		"coveralls": "^3.0",
+		"solidity-coverage": "^0.5.4",
+		"standard-version": "^4.0.0"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/alesanro/truffle-base-box.git"
+	},
+	"author": "Alex Rudyak <al.rudyak@gmail.com>",
+	"bugs": {
+		"url": "https://github.com/alesanro/truffle-base-box/issues"
+	},
+	"homepage": "https://github.com/alesanro/truffle-base-box#readme",
+	"license": "MIT"
+}
