@@ -12,8 +12,14 @@ module.exports = {
         "assert": false,
         "contract": false,
     },
+    "parserOptions": {
+        "ecmaVersion": 2018
+    },
     "rules": {
         "indent": ["error", "tab"],
+
+        "for-direction": "off",
+        "getter-return": "off",
 
         "comma-dangle": ["error", "always"],
         "no-cond-assign": ["error", "always"],
@@ -58,6 +64,7 @@ module.exports = {
 
         "no-undef": "warn",
         "no-empty": "warn",
+        "no-self-assign": ["error", { "props": false }],
 
         "no-console": "off"
     }

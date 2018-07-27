@@ -21,7 +21,7 @@
 		"babel-polyfill": "^6.26",
 		"babel-preset-env": "^1.7",
 		"babel-register": "^6.26",
-		"eslint": "4",
+		"eslint": "5",
 		"solium": "1",
 		"babel-eslint": "^8.2",
 		"coveralls": "^3.0",
