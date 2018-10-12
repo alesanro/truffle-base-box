@@ -1,9 +1,16 @@
 SHELL = /bin/bash -O extglob -c
 
 PUBLISH_BRANCH=develop
+RELEASE_BRANCH=release
 CURRENT_GIT_BRANCH:=$(shell git symbolic-ref --short HEAD)
 CURRENT_GIT_TAGS:=$(shell git tag -l --points-at HEAD)
 PACKAGE_VERSION:=$(shell node -pe "require('./package.json').version")
+PACKAGE_VERSIONS:=$(cat package.json \
+  | grep version \
+  | head -1 \
+  | awk -F: '{ print $2 }' \
+  | sed 's/[",]//g' \
+  | tr -d '[[:space:]]')
 
 .DEFAULT_GOAL: help
 .PHONY: generate_ts compile recompile_ts lint.js lint.sol lint.ts lint run_testrpc release_internal release_cleanup
@@ -54,8 +61,8 @@ release_internal: ## Intended to make truffle-box releases
 	else \
 		echo "Current branch is '$(PUBLISH_BRANCH)'. OK for publishing. Continue..."; \
 	fi; \
-	git checkout -b release; \
-	git push origin release; \
+	git checkout -b $(RELEASE_BRANCH); \
+	git push origin $(RELEASE_BRANCH); \
 	npm run release -- --dry-run; \
 
 	@read -p "Is all okay? Could we continue publishing (yes to continue): " publish_answer; \
@@ -68,8 +75,24 @@ release_internal: ## Intended to make truffle-box releases
 	fi; \
 	npm run release; \
 
+	$(MAKE) release_after
+	$(MAKE) release_cleanup
+
+	@echo "Package published successfully!"
+
+release_cleanup: ## Cleanup after release_internal
+	git checkout develop; \
+	git push origin --delete $(RELEASE_BRANCH); \
+	git branch -d $(RELEASE_BRANCH); \
+	echo "cleanup done"; \
+
+release_after:
+	if [[ "$(CURRENT_GIT_BRANCH)" != "$(PUBLISH_BRANCH)" ]]; then \
+		echo "Invalid branch to start public. Branch to start: 'develop'"; \
+		exit 3; \
+	fi \
 	release_version=$(PACKAGE_VERSION); \
-	git push origin release; \
+	git push origin $(RELEASE_BRANCH); \
 	git checkout develop; \
 	git merge --no-ff release -e -m "Merge from 'release-v$${release_version}'"; \
 	git checkout master; \
@@ -77,13 +100,3 @@ release_internal: ## Intended to make truffle-box releases
 	git tag "v$${release_version}"; \
 	git push origin develop; \
 	git push origin master; \
-	
-	$(MAKE) release_cleanup
-
-	@echo "Package published successfully!"
-
-release_cleanup: ## Cleanup after release_internal
-	git checkout develop; \
-	git push origin --delete release; \
-	git branch -d release; \
-	echo "cleanup done"; \
