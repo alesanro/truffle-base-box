@@ -5,12 +5,6 @@ RELEASE_BRANCH=release
 CURRENT_GIT_BRANCH:=$(shell git symbolic-ref --short HEAD)
 CURRENT_GIT_TAGS:=$(shell git tag -l --points-at HEAD)
 PACKAGE_VERSION:=$(shell node -pe "require('./package.json').version")
-PACKAGE_VERSIONS:=$(cat package.json \
-  | grep version \
-  | head -1 \
-  | awk -F: '{ print $2 }' \
-  | sed 's/[",]//g' \
-  | tr -d '[[:space:]]')
 
 .DEFAULT_GOAL: help
 .PHONY: generate_ts compile recompile_ts lint.js lint.sol lint.ts lint run_testrpc release_internal release_cleanup
@@ -55,7 +49,7 @@ run_testrpc: ## Runs testrpc from scripts
 	npx ts-node ./scripts-ts/run.ts
 
 release_internal: ## Intended to make truffle-box releases
-	if [[ "$(CURRENT_GIT_BRANCH)" != "$(PUBLISH_BRANCH)" ]]; then \
+	@if [[ "$(CURRENT_GIT_BRANCH)" != "$(PUBLISH_BRANCH)" ]]; then \
 		echo "Invalid branch to start public. Branch to start: 'develop'"; \
 		exit 3; \
 	else \
@@ -81,13 +75,13 @@ release_internal: ## Intended to make truffle-box releases
 	@echo "Package published successfully!"
 
 release_cleanup: ## Cleanup after release_internal
-	git checkout develop; \
+	@git checkout develop; \
 	git push origin --delete $(RELEASE_BRANCH); \
-	git branch -d $(RELEASE_BRANCH); \
+	git branch -D $(RELEASE_BRANCH); \
 	echo "cleanup done"; \
 
 release_after:
-	if [[ "$(CURRENT_GIT_BRANCH)" != "$(PUBLISH_BRANCH)" ]]; then \
+	@if [[ "$(CURRENT_GIT_BRANCH)" != "$(PUBLISH_BRANCH)" ]]; then \
 		echo "Invalid branch to start public. Branch to start: 'develop'"; \
 		exit 3; \
 	fi \
