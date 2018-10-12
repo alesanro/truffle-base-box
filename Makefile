@@ -81,8 +81,8 @@ release_cleanup: ## Cleanup after release_internal
 	echo "cleanup done"; \
 
 release_after:
-	@if [[ "$(CURRENT_GIT_BRANCH)" != "$(PUBLISH_BRANCH)" ]]; then \
-		echo "Invalid branch to start public. Branch to start: 'develop'"; \
+	@if [[ "$(CURRENT_GIT_BRANCH)" != "$(RELEASE_BRANCH)" ]]; then \
+		echo "Invalid branch to finish release. Branch to finish: 'release'"; \
 		exit 3; \
 	fi; \
 	release_version=$(PACKAGE_VERSION); \
