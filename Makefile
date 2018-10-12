@@ -1,7 +1,12 @@
 SHELL = /bin/bash -O extglob -c
 
+PUBLISH_BRANCH=develop
+CURRENT_GIT_BRANCH:=$(shell git symbolic-ref --short HEAD)
+CURRENT_GIT_TAGS:=$(shell git tag -l --points-at HEAD)
+PACKAGE_VERSION:=$(shell node -pe "require('./package.json').version")
+
 .DEFAULT_GOAL: help
-.PHONY: generate_ts compile recompile_ts lint.js lint.sol lint.ts lint run_testrpc
+.PHONY: generate_ts compile recompile_ts lint.js lint.sol lint.ts lint run_testrpc release_internal release_cleanup
 
 help: ## Shows 'help' description for available targets.
 	@IFS=$$'\n' ; \
@@ -41,3 +46,43 @@ lint: lint.sol lint.ts lint.js ## Lints all kind of files: *.sol, *.ts, *.js
 
 run_testrpc: ## Runs testrpc from scripts
 	npx ts-node ./scripts-ts/run.ts
+
+release_internal: ## Intended to make truffle-box releases
+	if [[ "$(CURRENT_GIT_BRANCH)" != "$(PUBLISH_BRANCH)" ]]; then \
+		echo "Invalid branch to start public. Branch to start: 'develop'"; \
+		exit 3; \
+	else \
+		echo "Current branch is '$(PUBLISH_BRANCH)'. OK for publishing. Continue..."; \
+	fi; \
+	git checkout -b release; \
+	git push origin release; \
+	npm run release -- --dry-run; \
+
+	@read -p "Is all okay? Could we continue publishing (yes to continue): " publish_answer; \
+	echo $${publish_answer}; \
+	ANSWER=$${publish_answer}; \
+	if [[ $${publish_answer} != "yes" ]]; then \
+		$(MAKE) release_cleanup; \
+		echo "Break publishing. Abort."; \
+		exit 1; \
+	fi; \
+	npm run release; \
+	release_version=$(PACKAGE_VERSION); \
+	git push origin release; \
+	git checkout develop; \
+	git merge --no-ff release -e -m "Merge from 'release-v$${release_version}'"; \
+	git checkout master; \
+	git merge --no-ff release -e -m "Release v$${release_version}"; \
+	git tag "v$${release_version}"; \
+	git push origin develop; \
+	git push origin master; \
+	
+	$(MAKE) release_cleanup
+
+	@echo "Package published successfully!"
+
+release_cleanup: ## Cleanup after release_internal
+	git checkout develop; \
+	git branch -rd origin/release; \
+	git branch -d release; \
+	echo "cleanup done"; \
