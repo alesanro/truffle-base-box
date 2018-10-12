@@ -84,7 +84,7 @@ release_after:
 	@if [[ "$(CURRENT_GIT_BRANCH)" != "$(PUBLISH_BRANCH)" ]]; then \
 		echo "Invalid branch to start public. Branch to start: 'develop'"; \
 		exit 3; \
-	fi \
+	fi; \
 	release_version=$(PACKAGE_VERSION); \
 	git push origin $(RELEASE_BRANCH); \
 	git checkout develop; \
