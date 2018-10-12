@@ -1,0 +1,6 @@
+{
+  "gasLimit": "8000000",
+  "gasPrice": "1",
+  "port": 8545,
+  "db_path": "./data/ganache-db"
+}

@@ -1,0 +1,14 @@
+{
+	"ignore": [
+	  "README.md"
+	],
+	"commands": {
+	  "Compile": "npx truffle compile",
+	  "Migrate": "npx truffle migrate",
+	  "Test contracts": "npm run test",
+	  "Run dev server": "npm run testrpc"
+	},
+	"hooks": {
+	  "post-unpack": "npm install"
+	}
+}

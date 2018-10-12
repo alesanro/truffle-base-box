@@ -1,0 +1,8 @@
+{
+  "extends": "@truffle-types/tslint-config",
+  "linterOptions": {
+    "exclude": [
+      "**/*.json"
+    ]
+  }
+}

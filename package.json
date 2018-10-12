@@ -1,0 +1,61 @@
+{
+	"name": "truffle-base-project",
+	"version": "0.0.1",
+	"description": "Provides basic truffle structure for ethereum project",
+	"main": "truffle.js",
+	"engines": {
+		"node": ">8.11",
+		"yarn": ">1.9"
+	},
+	"scripts": {
+		"test": "npm run compile npx truffle test",
+		"compile": "make compile",
+		"compile:all": "npx truffle compile --all && npm run compile",
+		"release": "standard-version",
+		"coverage": "./node_modules/.bin/solidity-coverage"
+	},
+	"dependencies": {
+		"ganache-core": "^2.2.1",
+		"truffle": "^4.1.14"
+	},
+	"devDependencies": {
+		"@0xproject/abi-gen": "^1.0.13",
+		"@truffle-types/abi-minifier": "^0.1.2",
+		"@truffle-types/artifacts-generator": "^0.1.3",
+		"@truffle-types/events-decoder": "^0.1.1",
+		"@truffle-types/ganache-core": "^0.1.3",
+		"@truffle-types/truffle": "^0.1.4",
+		"@truffle-types/truffle-contract": "^0.1.4",
+		"@truffle-types/tslint-config": "^0.1.3",
+		"@truffle-types/web3": "^0.1.3",
+		"@types/chai": "^4.1.4",
+		"@types/mocha": "^5.2.5",
+		"babel-eslint": "^10.0.1",
+		"babel-polyfill": "^6.26",
+		"babel-preset-env": "^1.7",
+		"babel-register": "^6.26",
+		"chai": "^4.2.0",
+		"coveralls": "^3.0",
+		"eslint": "5",
+		"ganache-cli": "^6.1",
+		"mocha": "^5.2.0",
+		"solidity-coverage": "^0.5.11",
+		"solium": "1",
+		"standard-version": "^4.4.0",
+		"ts-node": "^7.0.1",
+		"tslint": "^5.11.0",
+		"typescript": "^3.1.3"
+	},
+	"standard-version": {
+		"skip": {
+			"tag": true
+		}
+	},
+	"repository": "git+https://github.com/alesanro/truffle-base-box.git",
+	"author": "Alex Rudyak <al.rudyak@gmail.com>",
+	"bugs": {
+		"url": "https://github.com/alesanro/truffle-base-box/issues"
+	},
+	"homepage": "https://github.com/alesanro/truffle-base-box#readme",
+	"license": "MIT"
+}

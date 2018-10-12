@@ -1,2 +1,3 @@
-# truffle-base-project
+# Truffle Base Box
+
 Truffle box for basic project structure
