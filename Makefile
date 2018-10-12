@@ -93,4 +93,4 @@ release_after:
 	git merge --no-ff release -e -m "Release v$${release_version}"; \
 	git tag "v$${release_version}"; \
 	git push origin develop; \
-	git push origin master; \
+	git push origin master --tags; \
