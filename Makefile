@@ -67,6 +67,7 @@ release_internal: ## Intended to make truffle-box releases
 		exit 1; \
 	fi; \
 	npm run release; \
+
 	release_version=$(PACKAGE_VERSION); \
 	git push origin release; \
 	git checkout develop; \
