@@ -77,7 +77,7 @@ release_internal: ## Intended to make truffle-box releases
 	git push origin develop; \
 	git push origin master; \
 	
-	$(MAKE) cleanup
+	$(MAKE) release_cleanup
 
 	@echo "Package published successfully!"
 
