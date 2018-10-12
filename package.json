@@ -1,6 +1,6 @@
 {
   "name": "truffle-base-project",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Provides basic truffle structure for ethereum project",
   "main": "truffle.js",
   "engines": {
