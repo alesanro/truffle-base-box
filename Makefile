@@ -60,8 +60,6 @@ release_internal: ## Intended to make truffle-box releases
 	npm run release -- --dry-run; \
 
 	@read -p "Is all okay? Could we continue publishing (yes to continue): " publish_answer; \
-	echo $${publish_answer}; \
-	ANSWER=$${publish_answer}; \
 	if [[ $${publish_answer} != "yes" ]]; then \
 		$(MAKE) release_cleanup; \
 		echo "Break publishing. Abort."; \
