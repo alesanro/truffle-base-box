@@ -83,6 +83,6 @@ release_internal: ## Intended to make truffle-box releases
 
 release_cleanup: ## Cleanup after release_internal
 	git checkout develop; \
-	git branch -rd origin/release; \
+	git push origin --delete release; \
 	git branch -d release; \
 	echo "cleanup done"; \
