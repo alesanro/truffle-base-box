@@ -47,7 +47,7 @@ lint: lint.sol lint.ts lint.js ## Lints all kind of files: *.sol, *.ts, *.js
 run_testrpc: ## Runs testrpc from scripts
 	npx ts-node ./scripts-ts/run.ts
 
-release_internal:
+release_internal: ## Intended to make truffle-box releases
 	if [[ "$(CURRENT_GIT_BRANCH)" != "$(PUBLISH_BRANCH)" ]]; then \
 		echo "Invalid branch to start public. Branch to start: 'develop'"; \
 		exit 3; \
@@ -81,7 +81,7 @@ release_internal:
 
 	@echo "Package published successfully!"
 
-release_cleanup:
+release_cleanup: ## Cleanup after release_internal
 	git checkout develop; \
 	git branch -rd origin/release; \
 	git branch -d release; \
