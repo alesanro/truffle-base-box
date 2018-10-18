@@ -33,6 +33,15 @@ recompile_ts: ## Recompile full project
 	npx tsc --project scripts-ts
 	npx tsc --build
 
+recompile_test_ts: ## Recompile only tests
+	npx tsc --project test-ts
+
+compile_with_tests: compile ## Compiles contracts with the next test compilation
+	$(MAKE) recompile_test_ts
+
+develop_tests: ## Run watcher on test-ts folder and allow runtime test development
+	npx tsc --project test-ts --watch
+
 lint.sol: ## Lints *.sol files
 	npx solium --dir contracts --fix
 
