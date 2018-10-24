@@ -8,7 +8,8 @@
     "yarn": ">1.9"
   },
   "scripts": {
-    "test": "npm run compile npx truffle test",
+    "test": "npm run compile && npx truffle test",
+    "build": "npm run compile:all",
     "compile": "make compile",
     "compile:all": "npx truffle compile --all && npm run compile",
     "release": "standard-version",
@@ -57,5 +58,8 @@
     "url": "https://github.com/alesanro/truffle-base-box/issues"
   },
   "homepage": "https://github.com/alesanro/truffle-base-box#readme",
-  "license": "MIT"
+  "license": "MIT",
+  "publishConfig": {
+    "access": true
+  }
 }
