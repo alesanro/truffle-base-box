@@ -23,3 +23,6 @@ contracts/stub/
 
 coverage/
 coverage.json
+
+package/
+*.tgz
