@@ -31,7 +31,7 @@ recompile_ts: ## Recompile full project
 	npx tsc --project contracts-ts
 	npx tsc --project test-ts
 	npx tsc --project scripts-ts
-	npx tsc --build
+	npx tsc --project .
 
 recompile_test_ts: ## Recompile only tests
 	npx tsc --project test-ts
