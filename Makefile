@@ -43,16 +43,28 @@ develop_tests: ## Run watcher on test-ts folder and allow runtime test developme
 	npx tsc --project test-ts --watch
 
 lint.sol: ## Lints *.sol files
-	npx solium --dir contracts --fix
+	npx solium --dir contracts
 
 lint.js: ## Lints *.js files
-	npx eslint . --fix
+	npx eslint .
 
 lint.ts: ## Lints *.ts files
+	npx tslint --project scripts-ts
+	npx tslint --project test-ts
+
+lint: lint.sol lint.ts lint.js ## Lints all kind of files: *.sol, *.ts, *.js
+
+lint.sol.fix: ## Lints *.sol files  and fixes them
+	npx solium --dir contracts --fix
+
+lint.js.fix: ## Lints *.js files and fixes them
+	npx eslint . --fix
+
+lint.ts.fix: ## Lints *.ts files and fixes them
 	npx tslint --project scripts-ts --fix
 	npx tslint --project test-ts --fix
 
-lint: lint.sol lint.ts lint.js ## Lints all kind of files: *.sol, *.ts, *.js
+lint.fix: lint.sol.fix lint.ts.fix lint.js.fix ## Lints all kind of files: *.sol, *.ts, *.js and fixes them where possible
 
 run_testrpc: ## Runs testrpc from scripts
 	npx ts-node ./scripts-ts/run.ts
