@@ -31,19 +31,40 @@ recompile_ts: ## Recompile full project
 	npx tsc --project contracts-ts
 	npx tsc --project test-ts
 	npx tsc --project scripts-ts
-	npx tsc --build
+	npx tsc --project .
+
+recompile_test_ts: ## Recompile only tests
+	npx tsc --project test-ts
+
+compile_with_tests: compile ## Compiles contracts with the next test compilation
+	$(MAKE) recompile_test_ts
+
+develop_tests: ## Run watcher on test-ts folder and allow runtime test development
+	npx tsc --project test-ts --watch
 
 lint.sol: ## Lints *.sol files
-	npx solium --dir contracts --fix
+	npx solium --dir contracts
 
 lint.js: ## Lints *.js files
-	npx eslint . --fix
+	npx eslint .
 
 lint.ts: ## Lints *.ts files
+	npx tslint --project scripts-ts
+	npx tslint --project test-ts
+
+lint: lint.sol lint.ts lint.js ## Lints all kind of files: *.sol, *.ts, *.js
+
+lint.sol.fix: ## Lints *.sol files  and fixes them
+	npx solium --dir contracts --fix
+
+lint.js.fix: ## Lints *.js files and fixes them
+	npx eslint . --fix
+
+lint.ts.fix: ## Lints *.ts files and fixes them
 	npx tslint --project scripts-ts --fix
 	npx tslint --project test-ts --fix
 
-lint: lint.sol lint.ts lint.js ## Lints all kind of files: *.sol, *.ts, *.js
+lint.fix: lint.sol.fix lint.ts.fix lint.js.fix ## Lints all kind of files: *.sol, *.ts, *.js and fixes them where possible
 
 run_testrpc: ## Runs testrpc from scripts
 	npx ts-node ./scripts-ts/run.ts
@@ -60,8 +81,6 @@ release_internal: ## Intended to make truffle-box releases
 	npm run release -- --dry-run; \
 
 	@read -p "Is all okay? Could we continue publishing (yes to continue): " publish_answer; \
-	echo $${publish_answer}; \
-	ANSWER=$${publish_answer}; \
 	if [[ $${publish_answer} != "yes" ]]; then \
 		$(MAKE) release_cleanup; \
 		echo "Break publishing. Abort."; \
@@ -93,4 +112,4 @@ release_after:
 	git merge --no-ff release -e -m "Release v$${release_version}"; \
 	git tag "v$${release_version}"; \
 	git push origin develop; \
-	git push origin master; \
+	git push origin master --tags; \
