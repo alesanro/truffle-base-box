@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.0.6"></a>
+## 0.0.6 (2018-10-27)
+
+
+### Bug Fixes
+
+* **makefile:** build correct project ([6d8e962](https://github.com/alesanro/truffle-base-box/commit/6d8e962))
+* do not track npm pack artifacts ([5cffd8c](https://github.com/alesanro/truffle-base-box/commit/5cffd8c))
+* **makefile:** make additional linting with 'fix' param ([794174f](https://github.com/alesanro/truffle-base-box/commit/794174f))
+* **package:** correct 'npm run compile' script and allow publish by default ([9831ef5](https://github.com/alesanro/truffle-base-box/commit/9831ef5))
+
+
+
 <a name="0.0.5"></a>
 ## 0.0.5 (2018-10-12)
 
