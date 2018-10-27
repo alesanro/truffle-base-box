@@ -9,6 +9,5 @@
 	  "Run dev server": "make run_testrpc"
 	},
 	"hooks": {
-	  "post-unpack": "yarn"
 	}
 }
