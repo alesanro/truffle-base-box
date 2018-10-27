@@ -3,12 +3,12 @@
 	  "README.md"
 	],
 	"commands": {
-	  "Compile": "npx truffle compile",
+	  "Compile": "make compile",
 	  "Migrate": "npx truffle migrate",
-	  "Test contracts": "npm run test",
-	  "Run dev server": "npm run testrpc"
+	  "Test contracts": "yarn run test",
+	  "Run dev server": "make run_testrpc"
 	},
 	"hooks": {
-	  "post-unpack": "npm install"
+	  "post-unpack": "yarn"
 	}
 }
