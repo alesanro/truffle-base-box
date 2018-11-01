@@ -1,11 +1,11 @@
 {
   "name": "truffle-base-project",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Provides basic truffle structure for ethereum project",
   "main": "truffle.js",
   "engines": {
-    "node": ">8.11",
-    "yarn": ">1.9"
+    "node": ">=9.11",
+    "yarn": ">=1.10"
   },
   "scripts": {
     "test": "npm run compile && npx truffle test",
@@ -60,6 +60,7 @@
   "homepage": "https://github.com/alesanro/truffle-base-box#readme",
   "license": "MIT",
   "publishConfig": {
-    "access": true
+    "access": "public",
+    "allow": true
   }
 }

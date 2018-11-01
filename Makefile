@@ -28,7 +28,6 @@ compile: ## Compiles contracts and generate updated interfaces
 	make generate_ts
 
 recompile_ts: ## Recompile full project
-	npx tsc --project contracts-ts
 	npx tsc --project test-ts
 	npx tsc --project scripts-ts
 	npx tsc --project .
