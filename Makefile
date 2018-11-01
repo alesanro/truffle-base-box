@@ -108,6 +108,7 @@ release_after:
 	git checkout develop; \
 	git merge --no-ff release -e -m "Merge from 'release-v$${release_version}'"; \
 	git checkout master; \
+	git pull master; \
 	git merge --no-ff release -e -m "Release v$${release_version}"; \
 	git tag "v$${release_version}"; \
 	git push origin develop; \
