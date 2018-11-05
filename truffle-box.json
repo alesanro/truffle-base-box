@@ -9,5 +9,6 @@
 	  "Run dev server": "make run_testrpc"
 	},
 	"hooks": {
+		"post-unpack": "chmod a+x ./scripts/generate.sh"
 	}
 }
