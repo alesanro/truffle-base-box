@@ -1,14 +1,15 @@
 {
-	"ignore": [
-	  "README.md"
-	],
-	"commands": {
-	  "Compile": "make compile",
-	  "Migrate": "npx truffle migrate",
-	  "Test contracts": "yarn run test",
-	  "Run dev server": "make run_testrpc"
-	},
-	"hooks": {
-		"post-unpack": "chmod a+x ./scripts/generate.sh"
-	}
+  "ignore": ["README.md"],
+  "commands": {
+    "Contracts compile": "yarn contracts:compile",
+    "Build project": "yarn build",
+    "Build typescript files": "yarn tsc",
+    "Migrate": "yarn migrate",
+    "Test contracts": "yarn test",
+    "Test contracts without migrations": "yarn test:dev",
+    "Save dev server state": "yarn migrate:save",
+    "Load dev server state": "yarn migrate:unpack",
+    "Run dev server": "yarn ganache"
+  },
+  "hooks": {}
 }

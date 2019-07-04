@@ -1,6 +1,9 @@
 {
-  "gasLimit": "8000000",
-  "gasPrice": "1",
+  "network_id": 999,
+  "host": "127.0.0.1",
   "port": 8545,
-  "db_path": "./data/ganache-db"
+  "db_path": "./data/blockchain",
+  "gasPrice": 1,
+  "gasLimit": 800000,
+  "mnemonic": "brave dry ride escape panther wave wife coin input come cash survey"
 }
