@@ -64,17 +64,13 @@ coverage.info
 coverage.json
 
 
+typings/
+
 # Typescript generated
 
-contracts-ts/generated/contracts
-contracts-ts/generated/artifacts
-contracts-ts/generated/artifacts.d.ts
-
 dist/
-contracts-dist/
-scripts/dist/
-test/dist
 
 # Ganache db temp
 
 data/ganache-db
+data/blockchain/

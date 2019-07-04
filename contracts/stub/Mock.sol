@@ -1,4 +1,4 @@
-pragma solidity ^0.4.21;
+pragma solidity >=0.4.21 <0.6.0;
 
 contract Mock {
 
@@ -45,7 +45,7 @@ contract Mock {
         ignores[_sig] = _enabled;
     }
 
-    function expect(address _from, uint _value, bytes _input, bytes32 _return) public {
+    function expect(address _from, uint _value, bytes memory _input, bytes32 _return) public {
         expectations[++expectationsCount] = Expect(keccak256(abi.encodePacked(_from, _value, _input)), _return);
     }
 

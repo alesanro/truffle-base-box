@@ -1,0 +1,9 @@
+[
+  {
+    "generator": "@laborx/typechain",
+    "target": "./generator-tsc-plugin.js",
+    "files": "./build/contracts/!(SafeMath).json",
+    "outDir": "./typings",
+    "declareModule": "truffle-contracts"
+  }
+]
