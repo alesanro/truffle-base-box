@@ -1,5 +1,5 @@
 {
-  "ignore": ["README.md", ".travis.yml"],
+  "ignore": ["README.md", "CHANGELOG.md", "LICENSE", ".travis.yml"],
   "commands": {
     "Contracts compile": "yarn contracts:compile",
     "Build project": "yarn build",
