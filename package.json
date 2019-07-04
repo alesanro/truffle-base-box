@@ -4,53 +4,8 @@
   "description": "Provides basic truffle structure for ethereum project",
   "main": "truffle.js",
   "engines": {
-    "node": ">=9.11",
-    "yarn": ">=1.10"
-  },
-  "scripts": {
-    "test": "npm run compile && npx truffle test",
-    "build": "npm run compile:all",
-    "compile": "make compile",
-    "compile:all": "npx truffle compile --all && npm run compile",
-    "release": "standard-version",
-    "coverage": "./node_modules/.bin/solidity-coverage"
-  },
-  "dependencies": {
-    "ganache-core": "^2.2.1",
-    "truffle": "^4.1.14"
-  },
-  "devDependencies": {
-    "@0xproject/abi-gen": "^1.0.13",
-    "@truffle-types/abi-minifier": "^0.1.2",
-    "@truffle-types/artifacts-generator": "^0.1.3",
-    "@truffle-types/events-decoder": "^0.1.1",
-    "@truffle-types/ganache-core": "^0.1.3",
-    "@truffle-types/truffle": "^0.1.4",
-    "@truffle-types/truffle-contract": "^0.1.4",
-    "@truffle-types/tslint-config": "^0.1.3",
-    "@truffle-types/web3": "^0.1.3",
-    "@types/chai": "^4.1.4",
-    "@types/mocha": "^5.2.5",
-    "babel-eslint": "^10.0.1",
-    "babel-polyfill": "^6.26",
-    "babel-preset-env": "^1.7",
-    "babel-register": "^6.26",
-    "chai": "^4.2.0",
-    "coveralls": "^3.0",
-    "eslint": "5",
-    "ganache-cli": "^6.1",
-    "mocha": "^5.2.0",
-    "solidity-coverage": "^0.5.11",
-    "solium": "1",
-    "standard-version": "^4.4.0",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
-    "typescript": "^3.1.3"
-  },
-  "standard-version": {
-    "skip": {
-      "tag": true
-    }
+    "node": ">=10",
+    "yarn": ">= 1.13"
   },
   "repository": "git+https://github.com/alesanro/truffle-base-box.git",
   "author": "Alex Rudyak <al.rudyak@gmail.com>",
@@ -60,7 +15,84 @@
   "homepage": "https://github.com/alesanro/truffle-base-box#readme",
   "license": "MIT",
   "publishConfig": {
-    "access": "public",
-    "allow": true
+    "access": true
+  },
+  "devDependencies": {
+    "@laborx/gulp-tasks": "~0.2.4",
+    "@laborx/tsconfig-chronobank-lib": "~0.1.3",
+    "@laborx/tslint-chronobank-base": "~0.1.1",
+    "@laborx/typechain": "~0.3.12",
+    "@laborx/typechain-truffle-target": "~0.2.1",
+    "@truffle-types/events-decoder": "~0.1.12",
+    "@truffle-types/typescript-types": "~0.1.14",
+    "@types/chai": "~4.1.4",
+    "@types/chai-as-promised": "~7.1.0",
+    "@types/gulp": "~4.0.5",
+    "@types/lodash": "~4.14.116",
+    "@types/mocha": "~5.2.5",
+    "@types/node": "~10.12.7",
+    "chai": "~4.2.0",
+    "chai-as-promised": "~7.1.1",
+    "chai-bignumber": "~2.0.2",
+    "coveralls": "~3.0.2",
+    "eslint": "5",
+    "eth-gas-reporter": "~0.2.0",
+    "ethlint": "~1.2.2",
+    "gulp": "~4.0.0",
+    "husky": "~1.3.1",
+    "lint-staged": "~8.1.3",
+    "mocha": "~5.2.0",
+    "prettier": "~1.16.4",
+    "pretty-quick": "~1.10.0",
+    "solium": "~1.2.2",
+    "solium-config-chronobank": "~0.1.4",
+    "standard-version": "~4.4.0",
+    "truffle": "~5.0.26",
+    "ts-generator": "~0.0.8",
+    "ts-node": "~8.0.2",
+    "tslint": "~5.12.0",
+    "tslint-plugin-prettier": "~2.0.1",
+    "typescript": "~3.3.1",
+    "wsrun": "~3.5.0"
+  },
+  "scripts": {
+    "tsc": "tsc",
+    "gulp": "gulp",
+    "tslint": "tslint",
+    "pretty-quick": "pretty-quick",
+    "contracts:compile": "yarn run gulp compile",
+    "build:tsc": "yarn run tsc -b",
+    "build": "yarn run contracts:compile && yarn run build:tsc",
+    "ganache": "yarn run gulp runDefinedNetwork",
+    "migrate": "yarn run gulp migrateTruffle --includeMigrations=$npm_package_config_migration_dev",
+    "migrate:save": "yarn run gulp saveNetworkStateWithNoCommit",
+    "migrate:unpack": "yarn run gulp loadNetworkState",
+    "test": "yarn run test:ci",
+    "test:ci": "TS_NODE_FILES=true yarn run gulp testTruffleIndependent --noLogs",
+    "test:dev": "yarn run gulp testTruffleWithNoMigrations",
+    "test:dev:migrate": "yarn run gulp testTruffle",
+    "clean": "yarn run build:tsc --clean && rm -rf data build typings/truffle typings/truffle-contracts;"
+  },
+  "config": {
+    "migration": {
+      "dev": "./dist/migrations"
+    }
+  },
+  "standard-version": {
+    "skip": {
+      "tag": true
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "yarn run tslint --fix",
+      "yarn run pretty-quick --staged",
+      "git add"
+    ]
   }
 }

@@ -1,18 +1,15 @@
-sudo: required
-dist: trusty
 language: node_js
 node_js:
-  - '9'
-before_install:
-  - export NODE_OPTIONS="--max_old_space_size=4096"
-  - export PATH=$PATH:$(pwd)/node_modules/.bin
-install:
-  - npm install
-script:
-  - npm run lint
-  - npm test
-before_script:
-  - npm run testrpc > /dev/null &
-  - sleep 5
-# after_script:
-#   - travis_wait 50 npm run coverage && cat coverage/lcov.info | coveralls
+  - "10.15.1"
+
+cache: yarn
+
+install: yarn
+
+jobs:
+  include:
+    - stage: tests
+      name: "Tests"
+      script: 
+        - yarn build
+        - yarn test

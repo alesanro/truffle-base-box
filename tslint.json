@@ -1,8 +1,9 @@
 {
-  "extends": "@truffle-types/tslint-config",
+  "extends": ["@laborx/tslint-chronobank-base", "tslint-plugin-prettier"],
+  "rules": {
+    "prettier": true
+  },
   "linterOptions": {
-    "exclude": [
-      "**/*.json"
-    ]
+    "exclude": ["**/*.json"]
   }
 }
