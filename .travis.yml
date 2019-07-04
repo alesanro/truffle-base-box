@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "10.15.1"
+
+cache: yarn
+
+install: yarn
+
+jobs:
+  include:
+    - stage: tests
+      name: "Tests"
+      script: 
+        - yarn build
+        - yarn test
