@@ -7553,9 +7553,9 @@ qs@6.7.0, qs@^6.4.0:
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
 qs@~6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
-  integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.3.tgz#3aeeffc91967ef6e35c0e488ef46fb296ab76aad"
+  integrity sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==
 
 query-string@^5.0.1:
   version "5.1.1"
@@ -9148,10 +9148,10 @@ trim-right@^1.0.1:
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
 
-truffle@^5.0.26:
-  version "5.0.26"
-  resolved "https://registry.yarnpkg.com/truffle/-/truffle-5.0.26.tgz#cb9a6dcd77501821ba6e8ba51b2d4eef58da7458"
-  integrity sha512-gf3Khot59ZM2Tegqb2md0lpr1SXGUHKJkSajCyXsiFCiiHUbX6NpXn/mgJgk1SXt7FAHpL0zYdLI1pYfqzvBFw==
+truffle@~5.0.26:
+  version "5.0.44"
+  resolved "https://registry.yarnpkg.com/truffle/-/truffle-5.0.44.tgz#791df87992e32cf87840d3a58450e9e0331ccc0c"
+  integrity sha512-nbJAu5P76AU7wZxbQl/yPhf8g8gXMkVQtWZGRec5lz6w4fc4cOLrbAD6G6IJYVJqK3s8FTIjox0YKsI/Az/O6w==
   dependencies:
     app-module-path "^2.2.0"
     mocha "5.2.0"
